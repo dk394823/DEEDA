@@ -101,7 +101,7 @@ const FoodList: React.FC<FoodListProps> = ({ records, onEdit, title, onTitleChan
       <div className="pb-8">
         {filteredRecords.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
-            <p className="text-sm">沒有相關紀錄</p>
+            <p className="text-sm">沒有相關記錄</p>
           </div>
         ) : (
           filteredRecords.map((record) => (
