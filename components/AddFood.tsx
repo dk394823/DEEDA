@@ -140,7 +140,7 @@ const AddFood: React.FC<AddFoodProps> = ({ onSave, onCancel, initialData }) => {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">品名</label>
+                <label className="text-xs font-bold text-slate-500 uppercase">參戰選手</label>
                 <input
                 type="text"
                 required

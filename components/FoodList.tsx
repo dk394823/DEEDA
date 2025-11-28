@@ -91,7 +91,7 @@ const FoodList: React.FC<FoodListProps> = ({ records, onEdit, title, onTitleChan
         {/* Table Header Row */}
         <div className="grid grid-cols-[60px_1fr_48px_48px] gap-2 px-3 py-2 bg-slate-100 font-bold text-slate-400 uppercase tracking-wider border-y border-slate-200 text-[10px]">
            <div className="text-center flex items-center justify-center">照片</div>
-           <div className="flex items-center">品項</div>
+           <div className="flex items-center">參戰選手</div>
            <div className="text-center text-blue-400 flex items-center justify-center">K</div>
            <div className="text-center text-purple-400 flex items-center justify-center">E</div>
         </div>
