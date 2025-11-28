@@ -17,8 +17,6 @@ export interface FoodRecord {
   date: string; // ISO string
   notes: string;
   imageUrl?: string;
-  aiTags?: string[];
-  aiAnalysis?: string;
 }
 
 export enum AppTab {

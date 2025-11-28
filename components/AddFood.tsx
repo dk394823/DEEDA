@@ -1,9 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Plus, Save, Camera, X, Loader2, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Plus, Save, Camera, X, ArrowLeft, RefreshCw } from 'lucide-react';
 import { FoodRecord, ReactionType, PETS, PetId } from '../types';
 import ReactionSelector from './ReactionSelector';
-import { analyzeFoodItem } from '../services/geminiService';
 
 interface AddFoodProps {
   onSave: (record: FoodRecord) => void;
@@ -21,7 +20,6 @@ const AddFood: React.FC<AddFoodProps> = ({ onSave, onCancel, initialData }) => {
   });
   const [notes, setNotes] = useState('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Initialize form if editing
@@ -57,19 +55,6 @@ const AddFood: React.FC<AddFoodProps> = ({ onSave, onCancel, initialData }) => {
     e.preventDefault();
     if (!name.trim()) return;
 
-    let aiResult = { tags: initialData?.aiTags || [], summary: initialData?.aiAnalysis || '' };
-    
-    // Only re-analyze if it's a new record or name changed significantly and no tags exist
-    if (!initialData || (initialData.name !== name && (!aiResult.tags || aiResult.tags.length === 0))) {
-        setIsAnalyzing(true);
-        try {
-            aiResult = await analyzeFoodItem(name, brand, notes);
-        } catch (e) {
-            console.error("AI Analysis skipped or failed", e);
-        }
-        setIsAnalyzing(false);
-    }
-
     const record: FoodRecord = {
       id: initialData ? initialData.id : generateId(),
       name,
@@ -79,8 +64,6 @@ const AddFood: React.FC<AddFoodProps> = ({ onSave, onCancel, initialData }) => {
       notes,
       date: initialData ? initialData.date : new Date().toISOString(),
       imageUrl: imagePreview || undefined,
-      aiTags: aiResult.tags,
-      aiAnalysis: aiResult.summary
     };
 
     onSave(record);
@@ -206,20 +189,10 @@ const AddFood: React.FC<AddFoodProps> = ({ onSave, onCancel, initialData }) => {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={isAnalyzing}
             className="w-full py-4 bg-brand-500 text-white rounded-xl font-bold text-lg shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2"
           >
-            {isAnalyzing ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                處理中...
-              </>
-            ) : (
-              <>
-                <Save className="w-5 h-5" />
-                {initialData ? '更新紀錄' : '儲存紀錄'}
-              </>
-            )}
+            <Save className="w-5 h-5" />
+            {initialData ? '更新紀錄' : '儲存紀錄'}
           </button>
         </form>
       </div>

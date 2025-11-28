@@ -92,8 +92,8 @@ const FoodList: React.FC<FoodListProps> = ({ records, onEdit, title, onTitleChan
         <div className="grid grid-cols-[60px_1fr_48px_48px] gap-2 px-3 py-2 bg-slate-100 font-bold text-slate-400 uppercase tracking-wider border-y border-slate-200 text-[10px]">
            <div className="text-center flex items-center justify-center">照片</div>
            <div className="flex items-center">參戰選手</div>
-           <div className="text-center text-blue-400 flex items-center justify-center">K</div>
-           <div className="text-center text-purple-400 flex items-center justify-center">E</div>
+           <div className="text-center text-blue-400 flex items-center justify-center font-normal">K</div>
+           <div className="text-center text-purple-400 flex items-center justify-center font-normal">E</div>
         </div>
       </div>
 
@@ -127,15 +127,6 @@ const FoodList: React.FC<FoodListProps> = ({ records, onEdit, title, onTitleChan
               <div className="min-w-0 pr-1 flex flex-col justify-center h-full">
                 {record.brand && <span className="text-xs text-brand-600 font-bold truncate mb-0.5">{record.brand}</span>}
                 <h3 className="text-sm font-bold text-slate-800 leading-snug line-clamp-2">{record.name}</h3>
-                
-                {/* AI Tags */}
-                {record.aiTags && record.aiTags.length > 0 && (
-                   <div className="flex flex-wrap gap-1 mt-1">
-                      {record.aiTags.slice(0, 2).map(tag => (
-                          <span key={tag} className="text-[9px] text-slate-400 bg-slate-50 px-1 rounded-sm border border-slate-100">#{tag}</span>
-                      ))}
-                   </div>
-                )}
               </div>
 
               {/* Reactions - Centered - Compact */}
@@ -189,15 +180,6 @@ const FoodList: React.FC<FoodListProps> = ({ records, onEdit, title, onTitleChan
                         </div>
                     </div>
                     <h2 className="text-2xl font-black text-slate-800 leading-tight mb-2">{previewRecord.name}</h2>
-                    
-                    {/* Tags */}
-                    {previewRecord.aiTags && previewRecord.aiTags.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                            {previewRecord.aiTags.map(tag => (
-                                <span key={tag} className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-md font-medium">#{tag}</span>
-                            ))}
-                        </div>
-                    )}
                 </div>
 
                 {/* Reactions Display */}
@@ -222,14 +204,6 @@ const FoodList: React.FC<FoodListProps> = ({ records, onEdit, title, onTitleChan
                     </div>
                 )}
                 
-                {/* AI Analysis */}
-                {previewRecord.aiAnalysis && (
-                    <div className="bg-brand-50 p-4 rounded-xl border border-brand-100 mb-6">
-                        <h4 className="text-xs font-bold text-brand-400 uppercase mb-2">AI 分析摘要</h4>
-                        <p className="text-brand-800 text-sm leading-relaxed">{previewRecord.aiAnalysis}</p>
-                    </div>
-                )}
-
                 {/* Action Buttons */}
                 <button
                     onClick={() => {
